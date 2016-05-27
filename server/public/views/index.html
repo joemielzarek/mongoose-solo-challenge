@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Movies!</title>
+    <script src="/vendor/angular.min.js"></script>
+    <script src="/scripts/clientapp.js"></script>
+    <script src="/scripts/controllers/movieController.js"></script>
+
+    <link rel="stylesheet" href="/vendor/normalize.css"  />
+    <link rel="stylesheet" href="/styles/stylesheet.css"  />
+
+
+
+  </head>
+  <body ng-app="movieApp">
+    <main ng-controller="MovieController">
+      <section id="movieSubmission">
+        <h1>Submit A Movie</h1>
+        <form id="movieForm">
+          <label for="title">Title:</label>
+          <input type="text" id="currentMovieTitle" name="title" ng-model="currentMovie.title" />
+
+          <label for="director">Director:</label>
+          <input type="text" id="currentMovieDirector" name="title" ng-model="currentMovie.director" />
+
+          <label for="releaseDate">Release Date:</label>
+          <input type="date" id="currentMovieReleaseDate" name="releaseDate" ng-model="currentMovie.releaseDate" />
+
+          <button ng-click="submitCurrentMovie()">Submit</button>
+        </form>
+      </section>
+      <section id="movies">
+        <h1>Movie Listing</h1>
+
+          <select ng-model="sorting">
+            <option ng-model="sorting" value="title" >by Title</option>
+            <option ng-model="sorting" value="director" >by Director</option>
+            <option ng-model="sorting" value="releaseDate" >by Release Date</option>
+          </select>
+
+
+          <ul id="movieList" ng-repeat="movie in movies | orderBy: sorting">
+            <li class="movie" class="row">
+              <label for="title">Title:</label>
+              <input type="text" id="movie" name="title" ng-model="movie.title" />
+
+              <label for="director">Director:</label>
+              <input type="text" id="movie" name="director" ng-model="movie.director" />
+
+              <label for="releaseDate">Release Date:</label>
+              <input type="date" id="releaseDate" name="releaseDate" ng-model="movie.releaseDate" />
+
+              <button class="update" ng-click="updateMovie(movie)">Update</button>
+              <button class="delete" ng-click="deleteMovie(movie._id)">Delete</button>
+              <button class="comments" ng-click="showComments(movie._id)">Comments</button>
+              <div ng-show="displayedMovieId == movie._id">
+                <div ng-repeat="comment in movie.comments">
+                  <p>
+                    {{comment.content}}
+                    {{comment.author}}
+                  </p>
+                </div>
+                <form id="commentForm">
+                  <label for="comment">Comment:</label>
+                  <textarea id="comment" name="comment" ng-model="newComment.content"></textarea>
+
+                  <label for="author">Posted By:</label>
+                  <input type="text" id="author" name="author" ng-model="newComment.author" />
+
+                  <button ng-click="submitComment(movie._id)">Submit</button>
+                </form>
+              </div>
+            </li>
+          </ul>
+
+      </section>
+    </main>
+  </body>
+</html>

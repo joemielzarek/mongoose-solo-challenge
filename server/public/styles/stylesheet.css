@@ -1,0 +1,38 @@
+input {
+  width: 200px;
+  height: 30px;
+}
+
+li {
+  list-style: none
+}
+
+label {
+  font-weight: bold;
+  padding-left: 30px;
+}
+
+.movie {
+  margin: 50px;
+}
+
+button {
+  padding: 8px;
+  margin: 5px;
+}
+
+h1 {
+  text-align: center;
+}
+
+body {
+  padding-left: 20px;
+}
+
+select {
+  margin-left: 650px;
+}
+
+#movieForm {
+  margin-left: 85px;
+}
